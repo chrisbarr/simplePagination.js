@@ -42,7 +42,7 @@
 		},
 
 		selectPage: function(page) {
-			methods._selectPage.call(this, page - 1);
+			methods._selectPage.call(this, page - 1, false);
 		},
 
 		prevPage: function() {
@@ -135,10 +135,12 @@
 			$(panel).append($link);
 		},
 
-		_selectPage: function(pageIndex) {
+		_selectPage: function(pageIndex, callPageClick) {
 			var o = $(this).data('pagination');
 			o.currentPage = pageIndex;
-			o.onPageClick(pageIndex + 1);
+			if(callPageClick !== false) {
+				o.onPageClick(pageIndex + 1);
+			}
 			if (o.selectOnClick) {
 				methods._draw.call(this);
 			}
